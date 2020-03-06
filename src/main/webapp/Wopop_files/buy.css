@@ -1,0 +1,115 @@
+.modal {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(10px);
+    background: #0003;
+    display: flex;
+    user-select: none;
+}
+.modal .modal-dialog {
+    width: 600px;
+}
+.modal .modal-content {
+    transform: translateY(-20px);
+    position: relative;
+    width: 600px;
+    height: 400px;
+    background: #fff;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: drop-shadow(4px 4px 10px blue);
+}
+
+.modal-body {
+    height: 195px;
+}
+.modal-footer {
+    height: 40px;
+    display: flex;
+    padding: 0 25px 0 0;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-footer .btn {
+    margin-left: 7px;
+}
+.modal-footer .book-nums {
+    margin-left: 15px;
+    font-size: 14px;
+    color: #3339;
+}
+.modal-footer .book-nums::before {
+    content: '剩余:';
+    position: relative;
+}
+.modal-footer .book-nums::after {
+    content: '本';
+    position: relative;
+}
+.book-cover {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+}
+/* 此处高度可以适当调节 */
+.book-img {
+    height: 263px;
+    min-width: 150px;
+    width: auto;
+    background: #ccc3;
+}
+.book-img > img {
+    height: 263px;
+    width: auto;
+}
+.book-info {
+    height: 263px;
+    width: 300px;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.book-base {
+    height: 45px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.book-base .book-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+.book-base .book-price {
+    position: relative;
+    font-size: 14px;
+    color: red;
+    transform: translateY(10%) translateX(20px);
+}
+.book-base .book-price::after {
+    content: '元';
+    position: absolute;
+    font-size: 12px;
+    transform: translateY(10%) translateX(2px);
+}
+.book-base .book-price::before {
+    content: '￥';
+    position: absolute;
+    left: -15px;
+    transform: translateY(-15%);
+    font-size: 18px;
+}
+.book-info .book-state > p {
+    height: 230px;
+    font-size: 14px;
+    text-indent: 20px;
+    padding: 3px 7px;
+    word-break: keep-all;
+    overflow-y: auto;
+    text-overflow: ellipsis;
+}
