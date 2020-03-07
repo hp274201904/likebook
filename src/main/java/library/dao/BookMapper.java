@@ -19,4 +19,7 @@ public interface BookMapper {
 
     void insertBook(Book book);
 
+    Book selectBybookName(String bookName);
+
+    void deleteBook(Integer bookId);
 }

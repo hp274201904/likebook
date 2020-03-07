@@ -111,6 +111,9 @@
             line-height: 40px;
             margin: 0 10px 0 25px;
         }
+        textarea.form-control{
+            height:100px
+        }
     </style>
 </head>
 <body>
@@ -186,52 +189,56 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="bookinsert">
+                <form class="form-horizontal" id="bookinsert" enctype="multipart/form-data" method="post">
                     <div class="form-group">
                         <div class="text-center">
-                            <img src="" class="rounded" id="bookImage">
+                            <img src="" class="rounded" id="bookImage" height="200px" width="200px">
                         </div>
+                        <label class="col-sm-12" style="margin: 10px 0 1px;" id="addbookimage">
+                            修改图片封面：<input type="file" id="file" name="file">
+                        </label>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 control-label">书籍ID：
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" name="bookid" class="form-control" id="bookId_input" disabled="disabled">
+                            <input type="text"  class="form-control" id="bookId_input" disabled="disabled">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 control-label">书名：</label>
                         <div class="col-sm-10">
-                            <input type="text" name="bookname" class="form-control" id="bookName_input">
+                            <input type="text"  class="form-control" id="bookName_input">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 control-label">价格：</label>
                         <div class="col-sm-10">
-                            <input type="text" name="bookname" class="form-control" id="bookMoney_input">
+                            <input type="text" class="form-control" id="bookMoney_input">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 control-label">数量：</label>
                         <div class="col-sm-10">
-                            <input type="text" name="number" class="form-control" id="bookNumber_input">
+                            <input type="text"  class="form-control" id="bookNumber_input">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 control-label">分类：</label>
                         <div class="col-sm-10">
-                            <input type="text" name="number" class="form-control" id="bookSort_input">
+                            <input type="text"  class="form-control" id="bookSort_input">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 control-label">书籍信息：</label>
                         <div class="col-sm-10">
-                            <input type="text" name="number" class="form-control" id="bookMessage_input">
+                            <textarea   class="form-control" id="bookMessage_input">
+                            </textarea>
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -461,6 +468,10 @@
                                             <%--         分页条信息--%>
                                             <div class="col-md-6" id="page_nav_area6">
                                             </div>
+                                                <div>
+                                                    <button class="btn btn-info btn-sm _btn" onclick="openaddBook()">增加</button>
+                                                    <span class="glyphicon glyphicon-minus"></span>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
@@ -478,6 +489,7 @@
 <script>
     var currentpage;
     var pages;
+    var maxbookId;
 $(function () {
     to_page(1);
     to_buypage(1);
@@ -518,7 +530,7 @@ function books_table(result) {
             .click(()=>openuser("是",item.userName));
         var addBtn = $("<button></button>").addClass("btn btn-info btn-sm return_btn")
             .append($("<span></span>").addClass("glyphicon glyphicon-minus")).append("增加")
-            .click(()=>openuser("否",item.userName));;
+            .click(()=>openuser("否",item.userName));
         var delBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn")
             .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除")
             .click(()=>deleteUser(item.userName));
@@ -622,7 +634,7 @@ function openuser(thing,userName) {
 
 $("#user_update_btn").click(function () {
     //Integer userId,String userName,String password,Double money,String vip,String address
-    var userId=document.getElementById("userId_input").value
+    var userId=document.getElementById("userId_input").value;
     var userName=document.getElementById("userName_input").value;
     var password=document.getElementById("password_input").value;
     var money=document.getElementById("money_input").value;
@@ -998,11 +1010,12 @@ $("#user_update_btn").click(function () {
             }
         })
     }
-    //所有预约表单数据
+    //所有书的数据
     function books_table6(result) {
         //清空table表格
         $("#book_table6 tbody").empty();
         var books = result.list;
+        maxbookId=result.total+1;
         $.each(books, function (index, item) {
             var bookIdTd = $("<td></td>").append(item.booKId);
             var bookNameTd = $("<td></td>").append(item.bookName);
@@ -1071,7 +1084,9 @@ $("#user_update_btn").click(function () {
         var nav=$("<nav></nav>").append(ul);
         nav.appendTo("#page_nav_area6");
     }
+
     function opoenupdateBook(bookId,bookName,image,bookMessage,money,number,sort) {
+        document.getElementById("file").value="";
         const modal = document.querySelector("#bookinsert");
         const bookimage = modal.querySelector("#bookImage");
         const Id = modal.querySelector("#bookId_input");
@@ -1087,10 +1102,77 @@ $("#user_update_btn").click(function () {
         bookMoney.value =money;
         bookNumber.value=number;
         bookSort.value =sort;
+        $("#book_update_btn").html("修改");
         $('#bookmodal').modal({
             backdrop: 'static'
         });
     }
-
+    function openaddBook() {
+        document.getElementById("addbookimage").innerHTML="上传图片封面：<input type=\"file\" id=\"file\" name=\"file\">";
+        document.getElementById("file").value="";
+        $("#book_update_btn").html("新增");
+        $("#bookImage").attr("src","");
+        $("#bookId_input").val(maxbookId);
+        $("#bookName_input").val("");
+        $("#bookMessage_input").val("");
+        $("#bookMoney_input").val("");
+        $("#bookNumber_input").val("");
+        $("#bookSort_input").val("");
+        $('#bookmodal').modal({
+            backdrop: 'static'
+        });
+    }
+    $("#book_update_btn").click(function () {
+        var bookId = document.getElementById("bookId_input").value;
+        var bookName = document.getElementById("bookName_input").value;
+        var bookMessage = document.getElementById("bookMessage_input").value;
+        var money = document.getElementById("bookMoney_input").value;
+        var number = document.getElementById("bookNumber_input").value;
+        var sort = document.getElementById("bookSort_input").value;
+        var fomdate = new FormData($("#bookinsert")[0]);
+        fomdate.append("bookId", bookId);
+        fomdate.append("bookName", bookName);
+        fomdate.append("bookMessage", bookMessage);
+        fomdate.append("money", money);
+        fomdate.append("number", number);
+        fomdate.append("sort", sort);
+        //MultipartFile file,Integer bookId,String bookName,String bookMessage,Double money,Integer number,String sort)
+        console.log(document.getElementById("file").value);
+        if (document.getElementById("file").value !=""){
+            $.ajax({
+                url: "uploadImage",
+                data: fomdate,
+                type: "POST",
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    if (result.code==-1){
+                        alert(result.message);
+                    } else {
+                        alert(result.message);
+                        $("#bookmodal").modal('hide');
+                        to_bookpage(currentpage);
+                    }
+                }
+            })
+         }else {
+            $.ajax({
+                url:"updateBook",
+                data:{"bookId":bookId,"bookName":bookName,"bookMessage":bookMessage,"money":money,"number":number,"sort":sort},
+                type:"post",
+                success:function (result) {
+                    if (result.code==-1){
+                        alert(result.message);
+                    } else {
+                        alert(result.message);
+                        $("#bookmodal").modal('hide');
+                        to_bookpage(currentpage);
+                    }
+                }
+            })
+         }
+    })
 </script>
 </html>

@@ -27,7 +27,13 @@
         ,number=#{number},sort=#{sort} where bookId=#{booKId}
     </update>
     <insert id="insertBook" parameterType="library.entity.Book">
-        insert into book(booKId,bookName,image,bookMessage,money,number,sort)
-        values (#{booKId},#{bookName},#{image},#{bookMessage},#{money},#{number},#{sort})
+        insert into book(bookName,image,bookMessage,money,number,sort)
+        values (#{bookName},#{image},#{bookMessage},#{money},#{number},#{sort})
     </insert>
+    <select id="selectBybookName" parameterType="String" resultType="library.entity.Book" >
+        select * from book where bookName=#{bookName}
+    </select>
+    <delete id="deleteBook" parameterType="Integer">
+        delete
+    </delete>
  </mapper>

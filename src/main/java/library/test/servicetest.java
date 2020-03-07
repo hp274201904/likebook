@@ -31,11 +31,8 @@ public class servicetest {
     IndentService indentService;
     @Test
     public void test() {
-//        Msg msg = userService.updateAndInsert(2, "小小明", "123456", "是", 10.0, "成都市");
-//        System.out.println(msg.getMessage());
-        List<Journal> name = journalService.selectMyBuyJo("Your name");
-        for(Journal journal:name){
-            System.out.println(journal);
-        }
+        Book book=new Book(16,"1",null,"2",12,12.1,"1");
+        Msg msg = bookService.updateBook(book);
+        System.out.println(msg.getMessage());
     }
 }

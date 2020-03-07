@@ -53,11 +53,11 @@ public interface BookService {
      * 更新书籍
      * @param book
      */
-    Msg updateBook(Book book);
+    Msg updateAndInsertBook(Book book);
 
     /**
      * 插入数据
      * @param book
      */
-    Msg insertBook(Book book);
+    Msg updateBook(Book book);
 }

@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
                 msg.setMessage("用户名重复请重新命名！");
                 return msg;
             }else {
-                String image="temporary/userimage/男.jpeg";
+                String image="/userimage/男.jpeg";
                 userMapper.insertUser(userName,password,image,0.0,"否","");
                 msg.setCode(1);
                 msg.setMessage("注册成功！");
@@ -139,7 +139,12 @@ public class UserServiceImpl implements UserService {
         }else {
             User user = userMapper.selectUserById(userId);
             if (user==null){
-                userMapper.insertUser(userName,password,"temporary/userimage/男.jpeg",money,vip,address);
+                User user1 = userMapper.selectbyName(userName);
+                if (user1!=null){
+                    msg.setCode(-1);
+                    msg.setMessage("该用户名已存在，请从新输入！");
+                }
+                userMapper.insertUser(userName,password,"/userimage/男.jpeg",money,vip,address);
                 msg.setCode(1);
                 msg.setMessage("增加用户成功！");
                 return msg;

@@ -215,34 +215,57 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Msg updateBook(Book book) {
+    public Msg updateAndInsertBook(Book book) {
         Msg msg=new Msg();
-        if(book.getBooKId()==null||book.getMoney()==null||book.getNumber()==null
+        if(book.getMoney()==null||book.getNumber()==null
         ||book.getBookName().isEmpty()||book.getBookMessage().isEmpty()||book.getSort().isEmpty()){
             msg.setCode(-1);
-            msg.setMessage("输入的数据不完整，更新失败！");
+            msg.setMessage("输入的数据不完整，请重新输入！");
             return msg;
         }else {
-            bookMapper.updateBook(book);
-            msg.setCode(1);
-            msg.setMessage("更新成功！");
-            return msg;
+            Book book1 = bookMapper.selectById(book.getBooKId());
+            if (book1!=null){
+                bookMapper.updateBook(book);
+                msg.setCode(1);
+                msg.setMessage("更新成功！");
+                return msg;
+            }else {
+                Book book2 = bookMapper.selectBybookName(book.getBookName());
+                if (book2!=null){
+                msg.setCode(-1);
+                msg.setMessage("已经有了此书，请勿重复新增此书！");
+                return msg;
+                 }else {
+                    bookMapper.insertBook(book);
+                    msg.setCode(1);
+                    msg.setMessage("新增书籍成功！");
+                    return msg;
+                }
+            }
         }
     }
 
     @Override
-    public Msg insertBook(Book book) {
+    public Msg updateBook(Book book) {
         Msg msg=new Msg();
-        if(book.getBooKId()==null||book.getMoney()==null||book.getNumber()==null
-                ||book.getBookName().isEmpty()||book.getBookMessage().isEmpty()||book.getSort().isEmpty()||book.getImage().isEmpty()){
+        if(book.getMoney()==null||book.getNumber()==null ||book.getBookName().isEmpty()
+                ||book.getBookMessage().isEmpty()||book.getSort().isEmpty()){
             msg.setCode(-1);
             msg.setMessage("输入的数据不完整，添加失败！");
             return msg;
         }else {
-            bookMapper.insertBook(book);
-            msg.setCode(1);
-            msg.setMessage("添加成功！");
-            return msg;
+            Book book1 = bookMapper.selectById(book.getBooKId());
+            if (book1==null){
+                msg.setCode(-1);
+                msg.setMessage("输入的数据不完整，请重新输入！");
+                return msg;
+                }
+            else {
+                bookMapper.updateBook(book);
+                msg.setCode(1);
+                msg.setMessage("更新书籍成功！");
+                return msg;
+            }
         }
     }
 }

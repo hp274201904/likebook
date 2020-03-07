@@ -16,8 +16,6 @@
     <mvc:annotation-driven />
     <mvc:resources location="/bootstrap-3.3.7-dist/" mapping="/bootstrap-3.3.7-dist/**" />
     <mvc:resources mapping="/js/**" location="/js/"/>
-    <mvc:resources mapping="/temporary/bookimage/**" location="/temporary/bookimage/"/>
-    <mvc:resources mapping="/temporary/userimage/**" location="/temporary/userimage/"/>
     <mvc:resources mapping="/Wopop_files/**" location="/Wopop_files/"/>
 <!--    <mvc:default-servlet-handler/>-->
 </beans>
