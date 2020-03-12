@@ -31,8 +31,7 @@ public class servicetest {
     IndentService indentService;
     @Test
     public void test() {
-        Book book=new Book(16,"1",null,"2",12,12.1,"1");
-        Msg msg = bookService.updateBook(book);
+        Msg msg = bookService.buyBook("Your name", 7);
         System.out.println(msg.getMessage());
     }
 }

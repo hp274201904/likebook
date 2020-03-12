@@ -102,7 +102,7 @@ public class BookController {
     }
 
     /**
-     * 上传图片
+     * 上传图片(更新，增加书籍）
      * @param file
      * @param bookId
      * @param bookName
@@ -127,18 +127,36 @@ public class BookController {
             File targetFile = new File(filePath, newFileName);
             //把本地文件上传到封装上传文件位置的全路径
             file.transferTo(targetFile);
-            Book book = new Book(bookId, bookName, image, bookMessage, number, money, sort);
-            Msg msg = bookService.updateAndInsertBook(book);
+            Msg msg = bookService.updateAndInsertBook(bookId, bookName, image, bookMessage, money, number, sort);
             return msg;
-
-
     }
 
+    /**
+     * 更新书籍
+     * @param bookId
+     * @param bookName
+     * @param bookMessage
+     * @param money
+     * @param number
+     * @param sort
+     * @return
+     */
     @RequestMapping("/updateBook")
     @ResponseBody
     public Msg updateBook(Integer bookId,String bookName,String bookMessage,Double money,Integer number,String sort){
-        Msg msg = bookService.updateBook(new Book(bookId, bookName, null, bookMessage,number, money, sort));
+        Msg msg = bookService.updateBook(bookId, bookName, bookMessage, money, number, sort);
         return msg;
     }
 
+    /**
+     * 删除书籍
+     * @param bookId
+     * @return
+     */
+    @RequestMapping(value = "/deleteBook",method = RequestMethod.POST)
+    @ResponseBody
+    public Msg deleteBook(Integer bookId){
+        Msg msg = bookService.deleteBook(bookId);
+        return msg;
+    }
 }

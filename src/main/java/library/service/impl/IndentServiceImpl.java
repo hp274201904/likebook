@@ -80,4 +80,9 @@ public class IndentServiceImpl implements IndentService {
             return msg;
         }
     }
+
+    @Override
+    public void deleteByUser(String userName) {
+        indentMapper.deleteByuser(userName);
+    }
 }

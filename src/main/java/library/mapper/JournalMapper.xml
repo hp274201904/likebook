@@ -28,4 +28,10 @@
              where returnBook='已借阅' and userName=#{userName}
         </if>
     </select>
+    <select id="selectdeletBook" parameterType="Integer" resultType="library.entity.Journal">
+        select * from journal where bookId=#{bookId} and returnBook='未归还'
+    </select>
+    <delete id="deleteByuser" parameterType="String">
+        delete from journal where userName=#{userName}
+    </delete>
  </mapper>

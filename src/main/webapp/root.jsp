@@ -36,8 +36,7 @@
 
         /* 以下为样式美化代码，可以自行删改 */
         body {
-            /*background: url('http://s2.hdslb.com/bfs/static/blive/blfe-message-web/static/img/infocenterbg.a1a0d152.jpg')*/
-            background: url('Wopop_files/login_bgx.gif')
+            background: url('http://s2.hdslb.com/bfs/static/blive/blfe-message-web/static/img/infocenterbg.a1a0d152.jpg')
             top/cover no-repeat fixed !important;
         }
 
@@ -131,7 +130,7 @@
                         <label class="col-sm-6 control-label">用户ID：
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" disabled="disabled" name="bookid" class="form-control" id="userId_input" >
+                            <input type="text" disabled="disabled" name="bookid" class="form-control" id="userId_input">
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -195,7 +194,7 @@
                             <img src="" class="rounded" id="bookImage" height="200px" width="200px">
                         </div>
                         <label class="col-sm-12" style="margin: 10px 0 1px;" id="addbookimage">
-                            修改图片封面：<input type="file" id="file" name="file">
+                            修改图片封面：<input type="file" id="file" name="file" onchange="changge()">
                         </label>
                     </div>
                     <div class="form-group">
@@ -237,7 +236,7 @@
                     <div class="form-group">
                         <label class="col-sm-6 control-label">书籍信息：</label>
                         <div class="col-sm-10">
-                            <textarea   class="form-control" id="bookMessage_input">
+                            <textarea  class="form-control" id="bookMessage_input">
                             </textarea>
                             <span class="help-block"></span>
                         </div>
@@ -285,11 +284,11 @@
                     <div class="col-2" style="border:1px solid #cccccc;height:600px;">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">用户信息</a>
+                            <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab" aria-controls="v-pills-settings" aria-selected="false">书籍信息</a>
                             <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">购买记录</a>
                             <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">借阅记录</a>
                             <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">未处理订单</a>
                             <a class="nav-link" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab" aria-controls="v-pills-settings" aria-selected="false">所有订单</a>
-                            <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab" aria-controls="v-pills-settings" aria-selected="false">书籍信息</a>
                         </div>
                     </div>
                     <div class="col-9" style="border:1px solid #cccccc;height:600px;margin: auto;">
@@ -467,11 +466,8 @@
                                             </div>
                                             <%--         分页条信息--%>
                                             <div class="col-md-6" id="page_nav_area6">
+
                                             </div>
-                                                <div>
-                                                    <button class="btn btn-info btn-sm _btn" onclick="openaddBook()">增加</button>
-                                                    <span class="glyphicon glyphicon-minus"></span>
-                                                </div>
                                         </div>
                                     </div>
                                 </div>
@@ -489,7 +485,8 @@
 <script>
     var currentpage;
     var pages;
-    var maxbookId;
+    var maxbookId=${bookId};
+    var maxuserId=${userId};
 $(function () {
     to_page(1);
     to_buypage(1);
@@ -619,13 +616,13 @@ function openuser(thing,userName) {
             }
         })
     }else {
-        $("#userId_input").val("");
+        $("#userId_input").val(maxuserId);
         $("#userName_input").val("");
         $("#password_input").val("");
         $("#VIP_input").val("");
         $("#money_input").val("");
         $("#address_input").val("");
-        $("#user_update_btn").html("增加")
+        $("#user_update_btn").html("增加");
         $("#usermodal").modal({
             backdrop:"static"
         })
@@ -645,9 +642,12 @@ $("#user_update_btn").click(function () {
         data:{"userId":userId,"userName":userName,"password":password,"money":money,"vip":vip,"address":address},
         type:"POST",
         success:function (result) {
-            alert(result.message);
-            $("#usermodal").modal('hide');
-            to_page(currentpage);
+            if (result.code==-1){
+                alert(result.message);
+            }else {
+                $("#usermodal").modal('hide');
+                to_page(currentpage);
+            }
         }
     })
 })
@@ -1015,20 +1015,22 @@ $("#user_update_btn").click(function () {
         //清空table表格
         $("#book_table6 tbody").empty();
         var books = result.list;
-        maxbookId=result.total+1;
         $.each(books, function (index, item) {
             var bookIdTd = $("<td></td>").append(item.booKId);
             var bookNameTd = $("<td></td>").append(item.bookName);
             var moneyTd = $("<td></td>").append(item.money);
             var sortTd = $("<td></td>").append(item.sort);
-            var editBtn =$("<button></button>").addClass("btn btn-primary btn-sm edit_btn")
+            var editBtn =$("<button></button>").addClass("btn btn-primary btn-sm")
                 .append($("<span></span>").addClass("glyphicon glyphicon-pencil"))
                 .append("修改").click(()=>opoenupdateBook(item.booKId,item.bookName,item.image,item.bookMessage,item.money,item.number,item.sort));
-            var deldelBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn")
+            var addBook =$("<button></button>").addClass("btn btn-info btn-sm")
+                .append($("<span></span>").addClass("glyphicon glyphicon-pencil"))
+                .append("增加").click(()=>openaddBook());
+            var deldelBtn = $("<button></button>").addClass("btn btn-danger btn-sm")
                 .append($("<span></span>").addClass("glyphicon glyphicon-trash")).
-                append("删除");
+                append("删除").click(()=>deleteeBook(item.booKId));
             $("<tr></tr>").append(bookIdTd).append(bookNameTd).append(moneyTd).append(sortTd)
-                .append(editBtn).append(deldelBtn).appendTo("#book_table6 tbody");
+                .append(editBtn).append(addBook).append(deldelBtn).appendTo("#book_table6 tbody");
         })
     }
     //分页条数据
@@ -1077,9 +1079,11 @@ $("#user_update_btn").click(function () {
             }
             numli.click(function () {
                 to_bookpage(item)
-            })
+            });
+            //   <button class="btn btn-info btn-sm _btn" onclick="openaddBook()">增加</button>
             ul.append(numli);
         })
+
         ul.append(nextpage).append(lastPage);
         var nav=$("<nav></nav>").append(ul);
         nav.appendTo("#page_nav_area6");
@@ -1108,7 +1112,7 @@ $("#user_update_btn").click(function () {
         });
     }
     function openaddBook() {
-        document.getElementById("addbookimage").innerHTML="上传图片封面：<input type=\"file\" id=\"file\" name=\"file\">";
+        document.getElementById("addbookimage").innerHTML=" 修改图片封面：<input type=\"file\" id=\"file\" name=\"file\" onchange=\"changge()\">";
         document.getElementById("file").value="";
         $("#book_update_btn").html("新增");
         $("#bookImage").attr("src","");
@@ -1138,6 +1142,7 @@ $("#user_update_btn").click(function () {
         fomdate.append("sort", sort);
         //MultipartFile file,Integer bookId,String bookName,String bookMessage,Double money,Integer number,String sort)
         console.log(document.getElementById("file").value);
+
         if (document.getElementById("file").value !=""){
             $.ajax({
                 url: "uploadImage",
@@ -1173,6 +1178,29 @@ $("#user_update_btn").click(function () {
                 }
             })
          }
-    })
+    });
+    function deleteeBook(booKId) {
+        console.log(booKId);
+        $.ajax({
+            url:"deleteBook",
+            data:{"bookId":booKId},
+            type:"POST",
+            success:function (result) {
+                alert(result.message);
+                to_bookpage(currentpage);
+            }
+        })
+    }
+    //显示上传图片
+    function changge(){
+        var myimg = document.getElementById("bookImage");
+        var inputfile=document.getElementById("file").files[0];
+        var reader = new FileReader(); // 图片文件转换为base64
+        reader.readAsDataURL(inputfile);//用文件加载器加载文件
+        reader.onload = function() { // 显示图片
+            myimg.setAttribute('src',reader.result);//file_img是图片展示载体
+        }
+    }
+
 </script>
 </html>

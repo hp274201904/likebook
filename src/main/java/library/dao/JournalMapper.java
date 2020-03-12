@@ -25,4 +25,8 @@ public interface JournalMapper {
 
     List<Journal> selectMyBorrowJo(@Param("userName")String userName);
 
+    List<Journal> selectdeletBook(Integer bookId);
+
+    void deleteByuser(String userName);
+
 }

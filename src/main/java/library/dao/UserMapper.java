@@ -14,7 +14,15 @@ public interface UserMapper {
 
     User selectbyName(String userName);
 
-    void insertUser(@Param("userName") String userName,
+    void insertUser(@Param("userId")Integer userId,
+                    @Param("userName") String userName,
+                    @Param("password") String password,
+                    @Param("image")String image,
+                    @Param("money")Double money,
+                    @Param("vip")String vip,
+                    @Param("address")String address);
+
+    void insertUser2(@Param("userName") String userName,
                     @Param("password") String password,
                     @Param("image")String image,
                     @Param("money")Double money,
@@ -57,5 +65,7 @@ public interface UserMapper {
                       @Param("userName")String userName);
 
     User selectUserById(Integer userId);
+
+    User selectMax();
 
 }

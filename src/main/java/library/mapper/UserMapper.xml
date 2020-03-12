@@ -5,6 +5,9 @@
         select * from user where userName=#{userName}
     </select>
     <insert id="insertUser">
+        insert into user(userId,userName,password,image,money,vip,address) values (#{userId},#{userName},#{password},#{image},#{money},#{vip},#{address})
+    </insert>
+    <insert id="insertUser2">
         insert into user(userName,password,image,money,vip,address) values (#{userName},#{password},#{image},#{money},#{vip},#{address})
     </insert>
     <select id="selectByNameAndPD" resultType="library.entity.User">
@@ -65,5 +68,8 @@
     </update>
     <select id="selectUserById" parameterType="Integer" resultType="library.entity.User">
         select * from user where userId=#{userId};
+    </select>
+    <select id="selectMax" resultType="library.entity.User">
+        select * from user order by userId desc limit 1
     </select>
  </mapper>

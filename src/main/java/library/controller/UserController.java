@@ -3,7 +3,9 @@ package library.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+import library.entity.Book;
 import library.entity.User;
+import library.service.BookService;
 import library.service.UserService;
 import library.until.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +13,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    BookService bookService;
 
     /**
      * 注册
@@ -58,7 +65,13 @@ public class UserController {
         }else {
             User user = userService.selectOneUser(userName);
             if (user.getUserId()==1){
+                User user1 = userService.selectMax();
+                Book book1 = bookService.selectMax();
+                int userId = user1.getUserId() + 1;
+                int bookId = book1.getBooKId() + 1;
                 request.setAttribute("user",user);
+                request.setAttribute("userId",userId);
+                request.setAttribute("bookId",bookId);
                 request.getRequestDispatcher("root.jsp").forward(request,response);
             }else {
                 request.setAttribute("user",user);
@@ -202,6 +215,24 @@ public class UserController {
     @ResponseBody
     public String rechargeMoney(String userName,Double money){
         String msg = userService.rechargeMoney(userName, money);
+        return msg;
+    }
+
+    @RequestMapping("/updateuserimage")
+    @ResponseBody
+    public Msg updateuserimage(MultipartFile file,Integer userId,String userName,String password,String address) throws IOException {
+        //保存图片的路径
+        String filePath = "temporary/userimage";
+        //获取原始图片的拓展名
+        String originalFilename = file.getOriginalFilename();
+        //新文件的文件名
+        String newFileName = UUID.randomUUID() + originalFilename;
+        String image = "/userimage/" + newFileName;
+        //封装上传文件位置的全路径
+        File targetFile = new File(filePath, newFileName);
+        //把本地文件上传到封装上传文件位置的全路径
+        file.transferTo(targetFile);
+        Msg msg = userService.updateUser(userId,userName,password,image,address);
         return msg;
     }
 

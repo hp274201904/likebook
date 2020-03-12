@@ -108,4 +108,9 @@ public class JournalServiceImpl implements JournalService {
         List<Journal> journals = journalMapper.selectMyBorrowJo(null);
         return journals;
     }
+
+    @Override
+    public void deleteByUser(String userName) {
+        journalMapper.deleteByuser(userName);
+    }
 }

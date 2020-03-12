@@ -34,6 +34,9 @@
         select * from book where bookName=#{bookName}
     </select>
     <delete id="deleteBook" parameterType="Integer">
-        delete
+        delete from book where bookId=#{bookId}
     </delete>
+    <select id="selectMax" resultType="library.entity.Book">
+         select * from book order by bookId desc limit 1
+    </select>
  </mapper>

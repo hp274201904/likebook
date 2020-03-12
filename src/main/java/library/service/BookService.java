@@ -51,13 +51,22 @@ public interface BookService {
 
     /**
      * 更新书籍
-     * @param book
+     *
      */
-    Msg updateAndInsertBook(Book book);
+    Msg updateAndInsertBook(Integer bookId,String bookName,String image,String bookMessage,Double money,Integer number,String sort);
 
     /**
      * 插入数据
-     * @param book
+     *
      */
-    Msg updateBook(Book book);
+    Msg updateBook(Integer bookId,String bookName,String bookMessage,Double money,Integer number,String sort);
+
+    /**
+     * 删除书籍
+     * @param bookId
+     * @return
+     */
+    Msg deleteBook(Integer bookId);
+
+    Book selectMax();
 }

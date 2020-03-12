@@ -1,7 +1,11 @@
 package library.service.impl;
 
 import library.dao.UserMapper;
+import library.entity.Indent;
+import library.entity.Journal;
 import library.entity.User;
+import library.service.IndentService;
+import library.service.JournalService;
 import library.service.UserService;
 import library.until.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    JournalService journalService;
+    @Autowired
+    IndentService indentService;
     @Override
     public Msg insertUser(String userName, String password) {
         Msg msg=new Msg();
@@ -29,7 +37,7 @@ public class UserServiceImpl implements UserService {
                 return msg;
             }else {
                 String image="/userimage/男.jpeg";
-                userMapper.insertUser(userName,password,image,0.0,"否","");
+                userMapper.insertUser2(userName,password,image,0.0,"否","");
                 msg.setCode(1);
                 msg.setMessage("注册成功！");
                 return msg;
@@ -91,12 +99,19 @@ public class UserServiceImpl implements UserService {
             msg.setMessage( "删除的用户不存在！");
             return msg;
         }else {
-            userMapper.deleteUser(userName);
-            msg.setCode(1);
-            msg.setMessage( "删除成功！");
-            return msg;
+            if (userName.equals("admin")){
+                msg.setCode(-1);
+                msg.setMessage( "无法删除管理员！");
+                return msg;
+            }else {
+                userMapper.deleteUser(userName);
+                journalService.deleteByUser(userName);
+                indentService.deleteByUser(userName);
+                msg.setCode(1);
+                msg.setMessage( "删除成功！");
+                return msg;
+            }
         }
-
     }
 
     @Override
@@ -143,17 +158,32 @@ public class UserServiceImpl implements UserService {
                 if (user1!=null){
                     msg.setCode(-1);
                     msg.setMessage("该用户名已存在，请从新输入！");
+                    return msg;
+                }else {
+                    userMapper.insertUser(userId,userName,password,"/userimage/男.jpeg",money,vip,address);
+                    msg.setCode(1);
+                    msg.setMessage("增加用户成功！");
+                    return msg;
                 }
-                userMapper.insertUser(userName,password,"/userimage/男.jpeg",money,vip,address);
-                msg.setCode(1);
-                msg.setMessage("增加用户成功！");
-                return msg;
             }else {
-                userMapper.updateUserByAll(userId,userName,password,user.getImage(),address,vip,money);
-                msg.setCode(1);
-                msg.setMessage("修改用户成功！");
-                return msg;
+                if (!user.getUserName().equals(userName)){
+                    msg.setCode(-1);
+                    msg.setMessage("用户名不可修改！");
+                    return msg;
+                }else {
+                    userMapper.updateUserByAll(userId,userName,password,user.getImage(),address,vip,money);
+                    msg.setCode(1);
+                    msg.setMessage("修改用户成功！");
+                    return msg;
+                }
+
             }
         }
+    }
+
+    @Override
+    public User selectMax() {
+        User user = userMapper.selectMax();
+        return user;
     }
 }

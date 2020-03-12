@@ -22,4 +22,6 @@ public interface BookMapper {
     Book selectBybookName(String bookName);
 
     void deleteBook(Integer bookId);
+
+    Book selectMax();
 }

@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="Wopop_files/buy.css">
+    <link rel="stylesheet" type="text/css" href="static/buy.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="js/jquery-3.1.1.js"></script>
     <title>购买</title>
@@ -20,83 +20,72 @@
         * {
             padding: 0;
             margin: 0;
-            /* outline: 1px solid red; */
+            list-style: none;
+            user-select: none;
+            box-sizing: border-box;
         }
-        .card img {
-            height: 200px;
+        body,
+        html {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        body {
+            display: flex;
+            justify-content: center;
         }
         .card {
-            height: 350px;
-            margin-bottom: 30px;
-            margin-right: 15px;
-            display: inline-block;
-        }
-        .navbar {
+            margin: 15px;
+            width: 200px;
+            height: 266px;
+            background: #bfc4;
             position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .card-img-wrap {
+            width: 100%;
+            height: 100%;
+            background: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .card-img-wrap img {
+            width: 100%;
+            height: auto;
+        }
+        .card-operate {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            background: #ccc7;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            display: none;
+        }
+        .card:hover .card-operate {
+            display: flex;
         }
 
+        .card:hover {
+            box-shadow: 0 5px 10px #9993, 3px 8px 10px #6663,
+            -3px 8px 10px #6663;
+            transform: translateY(-5px);
+            transition: all 0.3s linear;
+        }
         /* 以下为样式美化代码，可以自行删改 */
         body {
             background: url('http://s2.hdslb.com/bfs/static/blive/blfe-message-web/static/img/infocenterbg.a1a0d152.jpg')
             /*background: url('Wopop_files/login_bgx.gif')*/
             top/cover no-repeat fixed !important;
         }
-
         .container {
             background: #fff9;
             padding-bottom: 35px;
-        }
-
-        /* 主体分块 */
-        .option {
-            margin: 15px 0 5px 0;
-            box-sizing: content-box;
-            background: #fffc;
-            border-radius: 4px;
-            overflow: auto;
-        }
-
-        .glass,
-        .glass-black {
-            position: relative;
-            backdrop-filter: blur(10px);
-        }
-
-        .glass::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: #fff3;
-            z-index: -1;
-        }
-
-        .glass-black::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: #0003;
-        }
-
-        .type-cover {
-            /* padding-right: 15px; */
-        }
-
-        .book-type {
-            width: 100%;
-            height: 45px;
-            line-height: 45px;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: 'Microsoft YaHei', 'Microsoft Sans Serif',
-            'Microsoft SanSerf', 微软雅黑;
-            text-align: center;
-            user-select: none;
         }
 
         li {
@@ -240,7 +229,7 @@
                         <li class="nav-link"><a class="nav-item" href="index.jsp">退出登录</a></li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search_input">
+                        <input class="form-control mr-sm-2" type="search" placeholder="搜索书籍" aria-label="Search" id="search_input">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="tohomepage()">搜索</button>
                     </form>
                 </div>
@@ -325,15 +314,15 @@
         $.each(books,function (index,item) {
             var body =
                 '<div class="card" style="width: 16rem;float:left; margin:10px 50px 10px 50px;height: 16rem;">' +
-                '<img class="card-img-top" src="' +
+                '<img class="card-img-wrap" src="' +
                 item.image +
-                '" alt="Card image cap">' +
-                '<div class="card-body">' +
-                '<button type="button" class="btn btn-primary" style="margin: -10px 30px  0 30px;" onclick="openBuy(' +
-                item.bookName+"'" +
+                '" alt="Card image cap" height="254px" width="200px">' +
+                '<div class="card-operate">' +
+                '<button type="button" class="btn btn-info" style="margin: -10px 30px  0 30px;" onclick="openBuy(' +
+                "'"+item.bookName+"'" +
                 ')">购买</button>' +
-                '<button type="button" class="btn btn-primary" style="margin: -10px 0  0 0;" onclick="borrowBook('+
-                item.bookName+"'" +
+                '<button type="button" class="btn btn-info" style="margin: -10px 0  0 0;" onclick="borrowBook('+
+                "'"+item.bookName+"'" +
                 ')">借阅</button>' +
                 '</div></div>';
             $(body).appendTo("#book_table");
@@ -430,8 +419,8 @@
                 if (${user.vip=='是'}){
                     alert("因为你是尊贵VIP，所以你可以享用八折");
                 }
-                console.log(result.message);
                 alert(result.message);
+                $("#open_input_buy").modal('hide');
             }
         })
     })
@@ -472,6 +461,8 @@
             type:"POST",
             success:function (result) {
                 alert(result.message);
+                $("#open_input_borrow").modal('hide');
+
             }
         })
     })

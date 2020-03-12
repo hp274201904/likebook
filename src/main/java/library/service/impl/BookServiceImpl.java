@@ -37,12 +37,16 @@ public class BookServiceImpl implements BookService {
     public Msg BorrowBook(Integer bookId,String userName) {
         Msg msg=new Msg();
         Book book = bookMapper.selectById(bookId);
+        User user = userMapper.selectbyName(userName);
         if (book.getNumber()<1){
             msg.setCode(-1);
             msg.setMessage("书籍暂时缺货！");
             return msg;
-        }else {
-            User user = userMapper.selectbyName(userName);
+        }else if (user.getAddress().isEmpty()){
+           msg.setCode(-1);
+           msg.setMessage("没有收获地址，无法借阅书籍！");
+           return msg;
+        } else {
                 if(user.getBookId1()==null){
                     if(user.getMoney()>=book.getMoney()+5){
                         userMapper.updateUserByName(user.getVip(),user.getMoney()-book.getMoney()-5,userName);
@@ -177,6 +181,10 @@ public class BookServiceImpl implements BookService {
             msg.setCode(-1);
             msg.setMessage( "暂无存货，购买失败！");
             return msg;
+        }else if (user.getAddress().isEmpty()){
+            msg.setCode(-1);
+            msg.setMessage("没有收货地址，无法购买书籍！");
+            return msg;
         }else {
             if ("否".equals(user.getVip())){
                 if (user.getMoney()<book.getMoney()){
@@ -215,28 +223,27 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Msg updateAndInsertBook(Book book) {
+    public Msg updateAndInsertBook(Integer bookId,String bookName,String image,String bookMessage,Double money,Integer number,String sort) {
         Msg msg=new Msg();
-        if(book.getMoney()==null||book.getNumber()==null
-        ||book.getBookName().isEmpty()||book.getBookMessage().isEmpty()||book.getSort().isEmpty()){
+        if(money==null||number==null ||bookName.isEmpty()||bookMessage.isEmpty()||sort.isEmpty()){
             msg.setCode(-1);
             msg.setMessage("输入的数据不完整，请重新输入！");
             return msg;
         }else {
-            Book book1 = bookMapper.selectById(book.getBooKId());
+            Book book1 = bookMapper.selectById(bookId);
             if (book1!=null){
-                bookMapper.updateBook(book);
+                bookMapper.updateBook(new Book(bookId,bookName,image,bookMessage,number,money,sort));
                 msg.setCode(1);
                 msg.setMessage("更新成功！");
                 return msg;
             }else {
-                Book book2 = bookMapper.selectBybookName(book.getBookName());
+                Book book2 = bookMapper.selectBybookName(bookName);
                 if (book2!=null){
                 msg.setCode(-1);
                 msg.setMessage("已经有了此书，请勿重复新增此书！");
                 return msg;
                  }else {
-                    bookMapper.insertBook(book);
+                    bookMapper.insertBook(new Book(bookId,bookName,image,bookMessage,number,money,sort));
                     msg.setCode(1);
                     msg.setMessage("新增书籍成功！");
                     return msg;
@@ -246,26 +253,47 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Msg updateBook(Book book) {
+    public Msg updateBook(Integer bookId,String bookName,String bookMessage,Double money,Integer number,String sort) {
         Msg msg=new Msg();
-        if(book.getMoney()==null||book.getNumber()==null ||book.getBookName().isEmpty()
-                ||book.getBookMessage().isEmpty()||book.getSort().isEmpty()){
+        if(money==null||number==null ||bookName.isEmpty()||bookMessage.isEmpty()||sort.isEmpty()){
             msg.setCode(-1);
-            msg.setMessage("输入的数据不完整，添加失败！");
+            msg.setMessage("输入的数据不完整，请重新输入！");
             return msg;
         }else {
-            Book book1 = bookMapper.selectById(book.getBooKId());
+            Book book1 = bookMapper.selectById(bookId);
             if (book1==null){
                 msg.setCode(-1);
                 msg.setMessage("输入的数据不完整，请重新输入！");
                 return msg;
                 }
             else {
-                bookMapper.updateBook(book);
+                bookMapper.updateBook(new Book(bookId,bookName,null,bookMessage,number,money,sort));
                 msg.setCode(1);
                 msg.setMessage("更新书籍成功！");
                 return msg;
             }
         }
+    }
+
+    @Override
+    public Msg deleteBook(Integer bookId) {
+        Msg msg=new Msg();
+        List<Journal> journals = journalMapper.selectdeletBook(bookId);
+        if (journals.size()!=0){
+            msg.setCode(-1);
+            msg.setMessage("还有用户在借阅此书，无法删除！");
+            return msg;
+        }else {
+            bookMapper.deleteBook(bookId);
+            msg.setCode(1);
+            msg.setMessage("删除成功！");
+            return msg;
+        }
+    }
+
+    @Override
+    public Book selectMax() {
+        Book book = bookMapper.selectMax();
+        return book;
     }
 }

@@ -22,4 +22,7 @@
     <update id="handleIndent">
         update indent set complete='已处理' where userName=#{userName} and bookName=#{bookName}
     </update>
+    <delete id="deleteByuser" parameterType="String">
+        delete from indent where userName=#{userName}
+    </delete>
  </mapper>

@@ -25,4 +25,6 @@ public interface IndentMapper {
 
     void handleIndent(@Param("userName")String userName,
                       @Param("bookName")String bookName);
+
+    void deleteByuser(String userName);
 }

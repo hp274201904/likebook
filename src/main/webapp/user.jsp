@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="Wopop_files/buy.css">
+    <link rel="stylesheet" type="text/css" href="static/buy.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="js/jquery-3.1.1.js"></script>
     <title>个人中心</title>
@@ -37,8 +37,7 @@
 
         /* 以下为样式美化代码，可以自行删改 */
         body {
-            /*background: url('http://s2.hdslb.com/bfs/static/blive/blfe-message-web/static/img/infocenterbg.a1a0d152.jpg')*/
-            background: url('Wopop_files/login_bgx.gif')
+            background: url('http://s2.hdslb.com/bfs/static/blive/blfe-message-web/static/img/infocenterbg.a1a0d152.jpg')
             top/cover no-repeat fixed !important;
         }
 
@@ -46,59 +45,6 @@
             background: #fff9;
             padding-bottom: 35px;
         }
-
-        /* 主体分块 */
-        .option {
-            margin: 15px 0 5px 0;
-            box-sizing: content-box;
-            background: #fffc;
-            border-radius: 4px;
-            overflow: auto;
-        }
-
-        .glass,
-        .glass-black {
-            position: relative;
-            backdrop-filter: blur(10px);
-        }
-
-        .glass::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: #fff3;
-            z-index: -1;
-        }
-
-        .glass-black::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: #0003;
-        }
-
-        .type-cover {
-            /* padding-right: 15px; */
-        }
-
-        .book-type {
-            width: 100%;
-            height: 45px;
-            line-height: 45px;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: 'Microsoft YaHei', 'Microsoft Sans Serif',
-            'Microsoft SanSerf', 微软雅黑;
-            text-align: center;
-            user-select: none;
-        }
-
         li {
             list-style: none;
             font-size: 14px;
@@ -112,6 +58,16 @@
             line-height: 40px;
             margin: 0 10px 0 25px;
         }
+        .to_togger{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
+        .to_togger button{
+            width: 72px;
+        }
     </style>
 </head>
 <body>
@@ -121,19 +77,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">购买</h5>
-                <button type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="book-cover">
-                    <div class="book-img">
-                        <img
-                                src=""
-                        />
+                    <div class="book-img"><img src=""/>
                     </div>
                     <div class="book-info">
                         <div class="book-base">
@@ -210,12 +160,20 @@
                     <div class="col-9" style="border:1px solid #cccccc;height:600px;margin: auto;">
                         <div  id="v-pills-tabContent">
                             <div class="tab-pane fade show active collapse" id="v-pills-home" >
-                                <form class="form-horizontal" id="userinsert">
+                                <form class="form-horizontal" id="userinsert" enctype="multipart/form-data" method="post">
+                                    <div class="form-group">
+                                        <div class="text-center">
+                                            <img src="${user.image}" class="rounded" id="bookImage" height="200px" width="200px">
+                                        </div>
+                                        <label class="col-sm-12" style="margin: 10px 0 1px;" id="addbookimage">
+                                            修改头像：<input type="file" id="file" name="file" onchange="changge()">
+                                        </label>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-sm-6 control-label">用户名：
                                         </label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="bookid" class="form-control" id="userName"  value="${user.userName}">
+                                            <input type="text" name="bookid" class="form-control" id="userName"  value="${user.userName}" disabled="disabled">
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
@@ -235,12 +193,14 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-6 control-label">我的地址：</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-12">
+                                        <div class="to_togger">
                                             <input type="text" name="number" class="form-control" id="address" value="${user.address}" >
-                                            <span class="help-block"></span>
+                                            <button type="button" class="btn btn-default"  data-dismiss="modal" onclick="window.location.reload()">撤销</button>
+                                            <button type="button" class="btn btn-primary" id="update_user_btn">修改</button>
+                                        </div>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-primary" id="update_user_btn">修改</button>
                                 </form>
 
                             </div>
@@ -341,16 +301,38 @@
         var password=document.getElementById("password").value;
         var money=document.getElementById("money").value;
         var address=document.getElementById("address").value;
-        $.ajax({
-            url:"updateUser",
-            data:{"userId":userId,"userName":userName,"password":password,"address":address},
-            type:"POST",
-            success:function (result) {
-                console.log(result)
-                alert(result.message);
-            }
+        if (document.getElementById("file").value ==""){
+            $.ajax({
+                url:"updateUser",
+                data:{"userId":userId,"userName":userName,"password":password,"address":address},
+                type:"POST",
+                success:function (result) {
+                    alert(result.message);
+                    window.location.href="selectOneUser?userName="+userName;
+                }
+            })
+        }else {
+            var fomdate = new FormData($("#userinsert")[0]);
+            fomdate.append("userId",userId);
+            fomdate.append("userName",userName);
+            fomdate.append("password",password);
+            fomdate.append("address",address);
+            //MultipartFile file,Integer userId,String userName,String password,String address
+            $.ajax({
+                url:"updateuserimage",
+                data:fomdate,
+                type:"post",
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function (result) {
+                    alert(result.message)
+                    window.location.href="selectOneUser?userName="+userName;
+                }
+            })
+        }
         })
-    })
     $(function () {
             to_page(1);
             to_borrowPage();
@@ -436,7 +418,11 @@
             var bookNameTd = $("<td></td>").append(item.bookName);
             var messageTd = $("<td></td>").append(item.message);
             var addressTd = $("<td></td>").append(item.address);
-            var completeTd = $("<td></td>").append(item.complete);
+            if (item.complete=='未处理'){
+                var completeTd = $("<td></td>").append(item.complete).css({ 'color': 'red'});
+            }else {
+                var completeTd = $("<td></td>").append(item.complete).css({ 'color': 'green'});
+            }
             $("<tr></tr>").append(bookNameTd).append(messageTd).append(addressTd).append(completeTd)
                 .appendTo("#book_table3 tbody");
         })
@@ -598,7 +584,7 @@
             type:"POST",
             success:function (result) {
                 alert(result.message);
-                window.location.reload();
+                // window.location.reload();
                 to_borrowPage();
             }
         })
@@ -612,10 +598,20 @@
             type:"POST",
             success:function (result) {
                 alert(result.message);
-                to_borrowPage();
+               to_page(1);
+               to_borrowPage();
             }
         })
     }
-
+    //显示上传图片
+    function changge(){
+        var myimg = document.getElementById("bookImage");
+        var inputfile=document.getElementById("file").files[0];
+        var reader = new FileReader(); // 图片文件转换为base64
+        reader.readAsDataURL(inputfile);//用文件加载器加载文件
+        reader.onload = function() { // 显示图片
+            myimg.setAttribute('src',reader.result);//file_img是图片展示载体
+        }
+    }
 </script>
 </html>

@@ -45,4 +45,10 @@ public interface IndentService {
     List<Indent> selectnotIndent();
 
     Msg handleIndent(String userName,String bookName);
+
+    /**
+     * 删除用户记录
+     * @param userName
+     */
+    void deleteByUser(String userName);
 }

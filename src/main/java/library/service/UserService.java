@@ -81,5 +81,5 @@ public interface UserService {
      */
     Msg updateAndInsert(Integer userId,String userName,String password,String vip,Double money,String address);
 
-
+    User selectMax();
 }

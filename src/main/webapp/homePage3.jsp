@@ -7,11 +7,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="stylesheet" type="text/css" href="Wopop_files/buy.css" />
-        <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        />
+        <link rel="stylesheet" type="text/css" href="static/buy.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
         <script src="js/jquery-3.1.1.js"></script>
         <title>首页</title>
         <style>
@@ -114,7 +111,7 @@
     </head>
 
     <body>
-        <!-- Modal -->
+        <!-- 充值Modal -->
         <div class="modal fade" id="open_input_money" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -144,140 +141,69 @@
             </div>
         </div>
 
-        <!-- Modal -->
-        <div
-            class="modal fade"
-            id="open_input_order"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="myModalLabel"
-        >
+        <!-- 预约Modal -->
+        <div class="modal fade" id="open_input_order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">预约</h4>
-                        <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                        >
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label
-                                for="input_money"
-                                class="col-sm-6 control-label"
-                                >地址为:
-                                <input
-                                    type="text"
-                                    name="input_money"
-                                    class="form-control"
-                                    id="input_address"
-                                    value="${user.address}"
-                                />
+                            <label for="input_money" class="col-sm-10 control-label">地址为:
+                                <input type="text" name="input_address" class="form-control" id="input_address" value="${user.address}"/>
                                 <span class="help-block"></span>
                             </label>
                         </div>
                         <div class="form-group">
-                            <label
-                                for="input_money"
-                                class="col-sm-6 control-label"
-                                >书籍名称为:
-                                <input
-                                    type="text"
-                                    name="input_money"
-                                    class="form-control"
-                                    id="input_bookName"
-                                    placeholder="书籍名称"
-                                />
+                            <label for="input_money" class="col-sm-10 control-label">书籍名称为:
+                                <input type="text" name="input_bookName" class="form-control" id="input_bookName" />
                                 <span class="help-block"></span>
                             </label>
                         </div>
                         <div class="form-group">
-                            <label
-                                for="input_money"
-                                class="col-sm-6 control-label"
-                                >书籍信息为:
-                                <input
-                                    type="text"
-                                    name="input_money"
-                                    class="form-control"
-                                    id="input_message"
-                                    placeholder="书籍信息"
-                                />
+                            <label for="input_money" class="col-sm-10 control-label">书籍信息为:
+                                <textarea   class="form-control" id="input_message"></textarea>
                                 <span class="help-block"></span>
                             </label>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-default"
-                            data-dismiss="modal"
-                        >
-                            关闭
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                         </button>
-                        <button
-                            type="button"
-                            class="btn btn-primary"
-                            id="input_order_btn"
-                        >
-                            预约
+                        <button type="button" class="btn btn-primary" id="input_order_btn">预约
                         </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Modal -->
-        <div
-            class="modal fade"
-            id="open_input_VIP"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="myModalLabel"
-        >
+        <!--充值VIP Modal -->
+        <div class="modal fade" id="open_input_VIP" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">VIP</h4>
-                        <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                        >
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="col-sm-6 control-label"
-                                >当前余额为:${user.money}
-                            </label>
+                            <label class="col-sm-6 control-label">当前余额为:${user.money}</label>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-6 control-label"
-                                >充值VIP需要30元
+                            <label class="col-sm-6 control-label">充值VIP需要30元
                             </label>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-default"
-                            data-dismiss="modal"
-                        >
-                            关闭
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                         </button>
-                        <button
-                            type="button"
-                            class="btn btn-primary"
-                            id="input_VIP_btn"
-                        >
+                        <button type="button" class="btn btn-primary" id="input_VIP_btn">
                             充值
                         </button>
                     </div>
@@ -290,12 +216,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">购买</h5>
-                        <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                        >
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -398,21 +319,10 @@
                 <div class="col-md-12 column">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <a class="navbar-brand" href="selectOneUser?userName=${user.userName}"><img src="${user.image}" height="60px" width="60px"/></a>
-                        <button
-                            class="navbar-toggler"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                        >
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div
-                            class="collapse navbar-collapse"
-                            id="navbarSupportedContent"
-                        >
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item active">
                                     <a class="nav-link" href="selectOneUser?userName=${user.userName}">${user.userName}<span class="sr-only"></span></a>
@@ -442,10 +352,10 @@
                         <div class="col-sm-2 column glass type-cover">
                             <div class="book-type">书籍分类</div>
                             <li><a href="tohomePage?userName=${user.userName}&sort=全部&bookName=">全部</a></li>
+                            <li><a href="tohomePage?userName=${user.userName}&sort=小说&bookName=">小说</a></li>
+                            <li><a href="tohomePage?userName=${user.userName}&sort=漫画&bookName=">漫画</a></li>
                             <li><a href="tohomePage?userName=${user.userName}&sort=科幻&bookName=">科幻</a></li>
                             <li><a href="tohomePage?userName=${user.userName}&sort=文学&bookName=">文学</a></li>
-                            <li><a href="tohomePage?userName=${user.userName}&sort=教育&bookName=">教育</a></li>
-                            <li><a href="tohomePage?userName=${user.userName}&sort=童书&bookName=">童书</a></li>
                             <li><a href="tohomePage?userName=${user.userName}&sort=其他&bookName=">其他</a></li>
                         </div>
                         <div class="col-sm-10 column">
@@ -473,7 +383,7 @@
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img
-                                            src="Wopop_files/logo21.png"
+                                            src="static/logo21.png"
                                             class="d-block w-100"
                                             alt="Wopop_files/logo21.png"
                                         />
@@ -559,38 +469,15 @@
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div
-                                class="tab-pane fade show active cards"
-                                id="home"
-                                role="tabpanel"
-                                aria-labelledby="home-tab"
-                            >
+                            <div class="tab-pane fade show active cards" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <!-- 热门书籍存放处 -->
                                 <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/三体1.jpg"
-                                        alt="Card image cap"
-                                    />
+                                    <img class="card-img-top" src="/bookimage/三体1.jpg" alt="Card image cap"/>
                                     <div class="card-body">
                                         <h5 class="card-title">三体1</h5>
-                                        <p class="card-text">
-                                            荣获雨果奖的科幻小说
-                                        </p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('三体1')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('三体1')"
-                                        >
-                                            借阅
-                                        </button>
+                                        <p class="card-text">荣获雨果奖的科幻小说</p>
+                                        <button type="button" class="btn btn-primary" onclick="openBuy('三体1')">购买</button>
+                                        <button type="button" class="btn btn-primary" onclick="borrowBook('三体1')">借阅</button>
                                     </div>
                                 </div>
                                 <div class="card" style="width: 16rem;">
@@ -648,30 +535,12 @@
                                     </div>
                                 </div>
                                 <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/流浪地球.jpeg"
-                                        alt="Card image cap"
-                                    />
+                                    <img class="card-img-top" src="/bookimage/流浪地球.jpeg" alt="Card image cap"/>
                                     <div class="card-body">
                                         <h5 class="card-title">流浪地球</h5>
-                                        <p class="card-text">
-                                            改编的电影票房冠军
-                                        </p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('流浪地球')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('流浪地球')"
-                                        >
-                                            借阅
-                                        </button>
+                                        <p class="card-text">改编的电影票房冠军</p>
+                                        <button type="button" class="btn btn-primary" onclick="openBuy('流浪地球')">购买</button>
+                                        <button type="button" class="btn btn-primary" onclick="borrowBook('流浪地球')">借阅</button>
                                     </div>
                                 </div>
                             </div>
@@ -974,14 +843,9 @@
                 data: { userName: userName },
                 type: 'POST',
                 success: function(result) {
-                    if (result.code==1){
                         alert(result.message);
                         $('#open_input_VIP').modal('hide');
                         window.location.reload();
-                    }else {
-                        alert(result.message);
-                        $('#open_input_VIP').modal('hide');
-                    }
                 }
             });
         });

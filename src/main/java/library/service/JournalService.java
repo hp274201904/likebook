@@ -54,4 +54,10 @@ public interface JournalService {
      * @return
      */
     List<Journal> selectBorrowJo();
+
+    /**
+     * 删除用户记录
+     * @param userName
+     */
+    void deleteByUser(String userName);
 }
