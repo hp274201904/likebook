@@ -24,4 +24,7 @@ public interface BookMapper {
     void deleteBook(Integer bookId);
 
     Book selectMax();
+
+    List<Book> selectnowBook();
+
 }

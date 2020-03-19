@@ -68,4 +68,6 @@ public interface UserMapper {
 
     User selectMax();
 
+    void updateUserVip(Integer userId);
+
 }

@@ -14,6 +14,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="static/buy.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/static/likebook.png"
+          mce_href="${pageContext.request.contextPath}/static/likebook.png" type="image/x-icon" />
     <script src="js/jquery-3.1.1.js"></script>
     <title>个人中心</title>
     <style>
@@ -173,7 +175,7 @@
                                         <label class="col-sm-6 control-label">用户名：
                                         </label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="bookid" class="form-control" id="userName"  value="${user.userName}" disabled="disabled">
+                                            <input type="text" name="bookid" class="form-control" id="userName"  value="${user.userName}">
                                             <span class="help-block"></span>
                                         </div>
                                     </div>

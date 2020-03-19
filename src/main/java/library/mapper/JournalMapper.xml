@@ -34,4 +34,13 @@
     <delete id="deleteByuser" parameterType="String">
         delete from journal where userName=#{userName}
     </delete>
+    <select id="selectPopularBook" resultType="String">
+        select bookName from journal where buyBook='已购买' GROUP BY bookName ORDER BY count(*) DESC LIMIT 4
+    </select>
+    <select id="selectPopularBBook" resultType="String">
+        select bookName from journal where returnBook='已借阅' GROUP BY bookName ORDER BY count(*) DESC LIMIT 4
+    </select>
+    <update id="updateUserName">
+        update journal set userName=#{afterName} where userName=#{beforeName}
+    </update>
  </mapper>

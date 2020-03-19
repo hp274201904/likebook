@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="library.dao.UserTimeMapper">
+    <insert id="insertTime">
+        insert into usertime(userId,userName,getVipTime) values(#{userId},#{userName},#{getVipTime})
+    </insert>
+    <select id="selectall" parameterType="Integer" resultType="library.entity.UserTime">
+        select * from usertime
+    </select>
+    <update id="updateuserTime" parameterType="Integer">
+        update usertime set getViptime=null where userId=#{userId}
+    </update>
+    <update id="updateUserName">
+        update usertime set userName=#{userName} where userId=#{userId}
+    </update>
+    <select id="selectByUserId" parameterType="Integer" resultType="library.entity.UserTime">
+        select * from usertime where userId=#{userId}
+    </select>
+    <update id="updateTime" parameterType="Integer">
+        update usertime set getVipTime=NOW() where userId=#{userId}
+    </update>
+</mapper>

@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <link rel="stylesheet" href="static/style.css" />
+    <link rel="icon" href="${pageContext.request.contextPath}/static/likebook.png"
+          mce_href="${pageContext.request.contextPath}/static/likebook.png" type="image/x-icon" />
     <title>注册</title>
 </head>
 <body>

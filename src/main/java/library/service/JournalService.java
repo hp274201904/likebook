@@ -1,5 +1,6 @@
 package library.service;
 
+import library.entity.Book;
 import library.entity.Journal;
 import library.until.Msg;
 
@@ -60,4 +61,12 @@ public interface JournalService {
      * @param userName
      */
     void deleteByUser(String userName);
+
+    /**
+     * 查询出热销书籍
+     * @return
+     */
+    List<Book> selectPopularBook();
+
+    List<Book> selectPopularBBook();
 }

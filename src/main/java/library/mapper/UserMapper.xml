@@ -72,4 +72,7 @@
     <select id="selectMax" resultType="library.entity.User">
         select * from user order by userId desc limit 1
     </select>
+    <update id="updateUserVip" parameterType="Integer">
+        update user set vip='否' where userId=#{userId}
+    </update>
  </mapper>

@@ -159,4 +159,15 @@ public class BookController {
         Msg msg = bookService.deleteBook(bookId);
         return msg;
     }
+
+    /**
+     * 查询最新书籍
+     * @return
+     */
+    @RequestMapping("/selectnowBook")
+    @ResponseBody
+    public List<Book> selectnowBook(){
+        List<Book> books = bookService.selectnowBook();
+        return books;
+    }
 }

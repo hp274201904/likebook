@@ -9,6 +9,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" type="text/css" href="static/buy.css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <link rel="icon" href="${pageContext.request.contextPath}/static/likebook.png"
+              mce_href="${pageContext.request.contextPath}/static/likebook.png" type="image/x-icon" />
         <script src="js/jquery-3.1.1.js"></script>
         <title>首页</title>
         <style>
@@ -140,7 +142,6 @@
                 </div>
             </div>
         </div>
-
         <!-- 预约Modal -->
         <div class="modal fade" id="open_input_order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -180,7 +181,6 @@
                 </div>
             </div>
         </div>
-
         <!--充值VIP Modal -->
         <div class="modal fade" id="open_input_VIP" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -196,7 +196,7 @@
                             <label class="col-sm-6 control-label">当前余额为:${user.money}</label>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-6 control-label">充值VIP需要30元
+                            <label class="col-sm-12 control-label">充值VIP需要30元可持续一个月，成为VIP可以享受八折购买书籍，并且预约的书籍可以提前处理！
                             </label>
                         </div>
                     </div>
@@ -359,71 +359,29 @@
                             <li><a href="tohomePage?userName=${user.userName}&sort=其他&bookName=">其他</a></li>
                         </div>
                         <div class="col-sm-10 column">
-                            <div
-                                id="carouselExampleIndicators"
-                                class="carousel slide"
-                                data-ride="carousel"
-                                style="height: 300px;overflow: hidden;"
-                            >
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 300px;overflow: hidden;">
                                 <ol class="carousel-indicators">
-                                    <li
-                                        data-target="#carouselExampleIndicators"
-                                        data-slide-to="0"
-                                        class="active"
-                                    ></li>
-                                    <li
-                                        data-target="#carouselExampleIndicators"
-                                        data-slide-to="1"
-                                    ></li>
-                                    <li
-                                        data-target="#carouselExampleIndicators"
-                                        data-slide-to="2"
-                                    ></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img
-                                            src="static/logo21.png"
-                                            class="d-block w-100"
-                                            alt="Wopop_files/logo21.png"
-                                        />
+                                        <img src="/bookimage/封面.jpg" class="d-block w-100" alt="/bookimage/封面.jpg" style="height: 300px"/>
                                     </div>
                                     <div class="carousel-item">
-                                        <img
-                                            src="/bookimage/封面.jpg"
-                                            class="d-block w-100"
-                                            alt="temporary/bookimage/封面.jpg"
-                                        />
+                                        <img src="/bookimage/封面2.jpg" class="d-block w-100" alt="/bookimage/封面2.jpg" style="height: 300px"/>
                                     </div>
                                     <div class="carousel-item">
-                                        <img
-                                            src="/bookimage/封面2.jpg"
-                                            class="d-block w-100"
-                                            alt="temporary/bookimage/封面2.jpg"
-                                        />
+                                        <img src="/bookimage/封面3.jpg" class="d-block w-100" alt="/bookimage/封面3.jpg" style="height: 300px"/>
                                     </div>
                                 </div>
-                                <a class="carousel-control-prev"
-                                   href="#carouselExampleIndicators"
-                                    role="button"
-                                    data-slide="prev"
-                                >
-                                    <span
-                                        class="carousel-control-prev-icon"
-                                        aria-hidden="true"
-                                    ></span>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Previous</span>
                                 </a>
-                                <a
-                                    class="carousel-control-next"
-                                    href="#carouselExampleIndicators"
-                                    role="button"
-                                    data-slide="next"
-                                >
-                                    <span
-                                        class="carousel-control-next-icon"
-                                        aria-hidden="true"
-                                    ></span>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
                             </div>
@@ -432,347 +390,26 @@
                     <div class="option">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a
-                                    class="nav-link active"
-                                    id="home-tab"
-                                    data-toggle="tab"
-                                    href="#home"
-                                    role="tab"
-                                    aria-controls="home"
-                                    aria-selected="true"
-                                    >热门书籍</a
-                                >
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">热销榜</a>
                             </li>
                             <li class="nav-item">
-                                <a
-                                    class="nav-link"
-                                    id="profile-tab"
-                                    data-toggle="tab"
-                                    href="#profile"
-                                    role="tab"
-                                    aria-controls="profile"
-                                    aria-selected="false"
-                                    >经典书籍</a
-                                >
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">借阅榜</a>
                             </li>
                             <li class="nav-item">
-                                <a
-                                    class="nav-link"
-                                    id="contact-tab"
-                                    data-toggle="tab"
-                                    href="#contact"
-                                    role="tab"
-                                    aria-controls="contact"
-                                    aria-selected="false"
-                                    >其他书籍</a
-                                >
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">更新榜</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
+                            <!-- 热销榜存放处 -->
                             <div class="tab-pane fade show active cards" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <!-- 热门书籍存放处 -->
-                                <div class="card" style="width: 16rem;">
-                                    <img class="card-img-top" src="/bookimage/三体1.jpg" alt="Card image cap"/>
-                                    <div class="card-body">
-                                        <h5 class="card-title">三体1</h5>
-                                        <p class="card-text">荣获雨果奖的科幻小说</p>
-                                        <button type="button" class="btn btn-primary" onclick="openBuy('三体1')">购买</button>
-                                        <button type="button" class="btn btn-primary" onclick="borrowBook('三体1')">借阅</button>
-                                    </div>
-                                </div>
-                                <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/三体2.jpg"
-                                        alt="Card image cap"
-                                    />
-                                    <div class="card-body">
-                                        <h5 class="card-title">三体2</h5>
-                                        <p class="card-text">
-                                            荣获雨果奖的科幻小说
-                                        </p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('三体2')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('三体2 ')"
-                                        >
-                                            借阅
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/三体3.jpg"
-                                        alt="Card image cap"
-                                    />
-                                    <div class="card-body">
-                                        <h5 class="card-title">三体3</h5>
-                                        <p class="card-text">
-                                            荣获雨果奖的科幻小说
-                                        </p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('三体3')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('三体3')"
-                                        >
-                                            借阅
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card" style="width: 16rem;">
-                                    <img class="card-img-top" src="/bookimage/流浪地球.jpeg" alt="Card image cap"/>
-                                    <div class="card-body">
-                                        <h5 class="card-title">流浪地球</h5>
-                                        <p class="card-text">改编的电影票房冠军</p>
-                                        <button type="button" class="btn btn-primary" onclick="openBuy('流浪地球')">购买</button>
-                                        <button type="button" class="btn btn-primary" onclick="borrowBook('流浪地球')">借阅</button>
-                                    </div>
-                                </div>
+
                             </div>
-                            <!-- 经典书籍存放处 -->
-                            <div
-                                class="tab-pane fade cards"
-                                id="profile"
-                                role="tabpanel"
-                                aria-labelledby="profile-tab"
-                            >
-                                <!-- 书籍存放处 -->
-                                <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/三国演义.jpg"
-                                        alt="Card image cap"
-                                    />
-                                    <div class="card-body">
-                                        <h5 class="card-title">三国演义</h5>
-                                        <p class="card-text">四大名著之一</p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('三国演义')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('三国演义')"
-                                        >
-                                            借阅
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/孙子兵法.jpg"
-                                        alt="Card image cap"
-                                    />
-                                    <div class="card-body">
-                                        <h5 class="card-title">孙子兵法</h5>
-                                        <p class="card-text">
-                                            中国现存最早的兵书
-                                        </p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('孙子兵法')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('孙子兵法')"
-                                        >
-                                            借阅
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/宋词三百首.jpg"
-                                        alt="Card image cap"
-                                    />
-                                    <div class="card-body">
-                                        <h5 class="card-title">宋词三百首</h5>
-                                        <p class="card-text">唐诗宋词的宋词</p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('宋词三百首')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('宋词三百首')"
-                                        >
-                                            借阅
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/红楼梦.jpg"
-                                        alt="Card image cap"
-                                    />
-                                    <div class="card-body">
-                                        <h5 class="card-title">红楼梦</h5>
-                                        <p class="card-text">四大名著之一</p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('红楼梦')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('红楼梦')"
-                                        >
-                                            借阅
-                                        </button>
-                                    </div>
-                                </div>
+                            <!-- 借阅榜存放处 -->
+                            <div class="tab-pane fade cards" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             </div>
-                            <!-- 其他书籍存放处 -->
-                            <div
-                                class="tab-pane fade cards"
-                                id="contact"
-                                role="tabpanel"
-                                aria-labelledby="contact-tab"
-                            >
-                                <!-- 书籍存放处 -->
-                                <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/原则.jpg"
-                                        alt="Card image cap"
-                                    />
-                                    <div class="card-body">
-                                        <h5 class="card-title">原则</h5>
-                                        <p class="card-text">
-                                            跨年演讲时推荐的书
-                                        </p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('原则')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('原则')"
-                                        >
-                                            借阅
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/茶道.jpg"
-                                        alt="Card image cap"
-                                    />
-                                    <div class="card-body">
-                                        <h5 class="card-title">茶道</h5>
-                                        <p class="card-text">
-                                            让你知道什么是茶道
-                                        </p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('茶道')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('茶道')"
-                                        >
-                                            借阅
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/蒙台梭利的家庭教育法.jpg"
-                                        alt="Card image cap"
-                                    />
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            蒙台梭利的家庭教育法
-                                        </h5>
-                                        <p class="card-text">
-                                            别人是如何教育孩子的
-                                        </p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('蒙台梭利的家庭教育法')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('蒙台梭利的家庭教育法')"
-                                        >
-                                            借阅
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card" style="width: 16rem;">
-                                    <img
-                                        class="card-img-top"
-                                        src="/bookimage/钢铁是怎样炼成的.jpg"
-                                        alt="Card image cap"
-                                    />
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            钢铁是怎样炼成的
-                                        </h5>
-                                        <p class="card-text">世界名著之一</p>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="openBuy('钢铁是怎样炼成的')"
-                                        >
-                                            购买
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            onclick="borrowBook('钢铁是怎样炼成的')"
-                                        >
-                                            借阅
-                                        </button>
-                                    </div>
-                                </div>
+                            <!-- 更新榜存放处 -->
+                            <div class="tab-pane fade cards" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
                             </div>
                         </div>
                     </div>
@@ -786,6 +423,12 @@
         crossorigin="anonymous"
     ></script>
     <script>
+        $(function () {
+            popularBook();
+            PopularBBook();
+            nowBook();
+        })
+
         $('#moneyButton').click(function() {
             //弹出模态框
             $('#open_input_money').modal({
@@ -894,6 +537,7 @@
                     }
                     alert(result.message);
                     $("#open_input_buy").modal('hide');
+                    window.location.reload();
                 }
             });
         });
@@ -935,8 +579,105 @@
                 success: function(result) {
                     alert(result.message);
                     $("#open_input_borrow").modal('hide');
+                    window.location.reload();
                 }
             });
         });
+        function popularBook() {
+            $.ajax({
+                url:'selectPopularBook',
+                success:function (result) {
+                    $.each(result,function (index,item) {
+                        var body =
+                            '<div class="card" style="width: 16rem;">' +
+                            '<img class="card-img-top" src="' +
+                            item.image +
+                            '" alt="Card image cap"/>' +
+                            '<div class="card-body">' +
+                            '<h6 class="card-title">' +
+                            item.bookName +
+                            '</h6>' +
+                            '<p class="card-text">'+
+                            '<font face="新宋体"  ">'+
+                            item.bookMessage +
+                            '</font>' +
+                            '</p>' +
+                            '<button type="button" class="btn btn-primary"  onclick="openBuy(' +
+                            "'"+item.bookName+"'" +
+                            ')">购买</button>' +
+                            '<button type="button" class="btn btn-primary" style="margin: 10px 15px;" onclick="borrowBook('+
+                            "'"+item.bookName+"'" +
+                            ')">借阅</button>' +
+                            '</div>' +
+                            '</div>';
+                        $(body).appendTo("#home");
+                    })
+                }
+            })
+        }
+        function nowBook() {
+            $.ajax({
+                url:'selectnowBook',
+                success:function (result) {
+                    $.each(result,function (index,item) {
+                        var body =
+                            '<div class="card" style="width: 16rem;">' +
+                            '<img class="card-img-top" src="' +
+                            item.image +
+                            '" alt="Card image cap"/>' +
+                            '<div class="card-body">' +
+                            '<h6 class="card-title">' +
+                            item.bookName +
+                            '</h6>' +
+                            '<p class="card-text">'+
+                            '<font face="新宋体"  ">'+
+                            item.bookMessage +
+                            '</font>' +
+                            '</p>' +
+                            '<button type="button" class="btn btn-primary"  onclick="openBuy(' +
+                            "'"+item.bookName+"'" +
+                            ')">购买</button>' +
+                            '<button type="button" class="btn btn-primary" style="margin: 10px 15px;" onclick="borrowBook('+
+                            "'"+item.bookName+"'" +
+                            ')">借阅</button>' +
+                            '</div>' +
+                            '</div>';
+                        $(body).appendTo("#contact");//contact
+                    })
+                }
+            })
+        }
+        function PopularBBook() {
+            $.ajax({
+                url:'selectPopularBBook',
+                success:function (result) {
+                    $.each(result,function (index,item) {
+                        var body =
+                            '<div class="card" style="width: 16rem;">' +
+                            '<img class="card-img-top" src="' +
+                            item.image +
+                            '" alt="Card image cap"/>' +
+                            '<div class="card-body">' +
+                            '<h6 class="card-title">' +
+                            item.bookName +
+                            '</h6>' +
+                            '<p class="card-text">'+
+                            '<font face="新宋体"  ">'+
+                            item.bookMessage +
+                            '</font>' +
+                            '</p>' +
+                            '<button type="button" class="btn btn-primary"  onclick="openBuy(' +
+                            "'"+item.bookName+"'" +
+                            ')">购买</button>' +
+                            '<button type="button" class="btn btn-primary" style="margin: 10px 15px;" onclick="borrowBook('+
+                            "'"+item.bookName+"'" +
+                            ')">借阅</button>' +
+                            '</div>' +
+                            '</div>';
+                        $(body).appendTo("#profile");
+                    })
+                }
+            })
+        }
     </script>
 </html>

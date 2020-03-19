@@ -296,4 +296,15 @@ public class BookServiceImpl implements BookService {
         Book book = bookMapper.selectMax();
         return book;
     }
+
+    @Override
+    public List<Book> selectnowBook() {
+        List<Book> books = bookMapper.selectnowBook();
+        int i=1;
+        for (Book book:books){
+            book.setBookMessage("更新榜第"+i+"名");
+            i++;
+        }
+        return books;
+    }
 }

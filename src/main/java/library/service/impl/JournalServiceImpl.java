@@ -11,6 +11,7 @@ import library.until.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -112,5 +113,33 @@ public class JournalServiceImpl implements JournalService {
     @Override
     public void deleteByUser(String userName) {
         journalMapper.deleteByuser(userName);
+    }
+
+    @Override
+    public List<Book> selectPopularBook() {
+        List<String> bookNames = journalMapper.selectPopularBook();
+        List<Book> books=new ArrayList<>();
+        int i=1;
+        for (String bookName:bookNames){
+            Book book = bookMapper.selectOneBook(bookName);
+            book.setBookMessage("热销榜第"+i+"名");
+            i++;
+            books.add(book);
+        }
+        return books;
+    }
+
+    @Override
+    public List<Book> selectPopularBBook() {
+        List<String> bookNames = journalMapper.selectPopularBBook();
+        List<Book> books=new ArrayList<>();
+        int i=1;
+        for (String s:bookNames){
+            Book book = bookMapper.selectOneBook(s);
+            book.setBookMessage("借阅榜第"+i+"名");
+            i++;
+            books.add(book);
+        }
+        return books;
     }
 }

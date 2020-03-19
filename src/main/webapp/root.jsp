@@ -13,6 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/static/likebook.png"
+          mce_href="${pageContext.request.contextPath}/static/likebook.png" type="image/x-icon" />
     <script src="js/jquery-3.1.1.js"></script>
     <title>后台管理</title>
     <style>
@@ -645,8 +647,9 @@ $("#user_update_btn").click(function () {
             if (result.code==-1){
                 alert(result.message);
             }else {
+                alert(result.message);
                 $("#usermodal").modal('hide');
-                to_page(currentpage);
+                window.location.reload();
             }
         }
     })

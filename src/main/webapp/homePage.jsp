@@ -14,6 +14,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="static/buy.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/static/likebook.png"
+           mce_href="${pageContext.request.contextPath}/static/likebook.png" type="image/x-icon" />
     <script src="js/jquery-3.1.1.js"></script>
     <title>购买</title>
     <style>

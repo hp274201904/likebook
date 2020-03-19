@@ -29,4 +29,11 @@ public interface JournalMapper {
 
     void deleteByuser(String userName);
 
+    List<String> selectPopularBook();
+
+    List<String> selectPopularBBook();
+
+    void updateUserName(@Param("beforeName")String beforeName,
+                        @Param("afterName")String afterName);
+
 }

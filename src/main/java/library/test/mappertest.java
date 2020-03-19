@@ -1,13 +1,12 @@
 package library.test;
 
 
-import library.dao.BookMapper;
-import library.dao.IndentMapper;
-import library.dao.JournalMapper;
-import library.dao.UserMapper;
+import jdk.management.resource.ResourceType;
+import library.dao.*;
 import library.entity.Book;
 import library.entity.Journal;
 import library.entity.User;
+import library.entity.UserTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -15,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -29,12 +30,15 @@ public class mappertest {
     UserMapper userMapper;
     @Autowired
     JournalMapper journalMapper;
+    @Autowired
+    UserTimeMapper userTimeMapper;
 
     @Test
     public void test3(){
-        User user = userMapper.selectMax();
-        System.out.println(user.getUserId());
-        Book book = bookMapper.selectMax();
-        System.out.println(book.getBooKId());
+//       UserTime userTime=new UserTime(null,null,null);
+//       if (userTime.getGetVipTime()==null){
+//           System.out.println("qwer");
+//       }
+        UserTime userTime = userTimeMapper.selectByUserId(1);
     }
 }

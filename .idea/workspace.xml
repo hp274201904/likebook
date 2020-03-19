@@ -10,12 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8874bfc1-1f33-4211-b473-a88a61b3cf86" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/likebook.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/背景.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/library/dao/UserTimeMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/library/entity/UserTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/library/mapper/UserTimeMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/likebook.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/controller/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/library/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/library/controller/JournalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/controller/JournalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/dao/BookMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/dao/BookMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/dao/IndentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/dao/IndentMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/dao/JournalMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/dao/JournalMapper.java" afterDir="false" />
@@ -25,41 +26,13 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/library/mapper/JournalMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/mapper/JournalMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/mapper/UserMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/library/service/IndentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/service/IndentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/service/JournalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/service/JournalService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/library/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/service/impl/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/service/impl/BookServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/library/service/impl/IndentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/service/impl/IndentServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/service/impl/JournalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/service/impl/JournalServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/test/mappertest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/test/mappertest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/library/test/servicetest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/library/test/servicetest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resource/ApplicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource/ApplicationContext.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resource/SpringMVC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource/SpringMVC.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/JQuery.cookie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/askgreen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/buy.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/buy.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/errorred.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/google_jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/google_jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/jquery.pagination.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/jquery.ui.all.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/likebook.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/loading1.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/loadingpn.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/login_bgx.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/login_m_bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/logo21.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/logo21.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/okgreen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/pagination.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/site_bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/style_log.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/userpanel.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Wopop_files/webtemples.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/homePage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/homePage.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/homePage3.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/homePage3.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
@@ -121,7 +94,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/META-INF/MANIFEST.MF" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../数据库管理/dbmanager-application" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -131,9 +104,12 @@
     <property name="settings.editor.selected.configurable" value="spring" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="library.service.impl" />
-      <recent name="been" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\项目\图书系统\likebook\src\main\webapp\static" />
+      <recent name="F:\项目合集\likebook\src\main\resource" />
+      <recent name="E:\代码\练习\likebook\src\main\webapp\bootstrap-3.3.7-dist\css" />
+      <recent name="E:\代码\练习\likebook\src\main\webapp" />
+      <recent name="F:\idea\新建文件夹\library\src\main\java\mapper" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\项目\图书系统\likebook\target\classes" />
@@ -142,12 +118,9 @@
       <recent name="E:\代码\练习\likebook\src\main\webapp\temporary\bookimage" />
       <recent name="E:\代码\练习\likebook\src\main\webapp" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\项目\图书系统\likebook\src\main\webapp\static" />
-      <recent name="F:\项目合集\likebook\src\main\resource" />
-      <recent name="E:\代码\练习\likebook\src\main\webapp\bootstrap-3.3.7-dist\css" />
-      <recent name="E:\代码\练习\likebook\src\main\webapp" />
-      <recent name="F:\idea\新建文件夹\library\src\main\java\mapper" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="library.service.impl" />
+      <recent name="been" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -163,8 +136,8 @@
     </option>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.29">
-    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="library.test.test" />
+    <configuration name="mappertest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="library.test.mappertest" />
       <module name="library" />
       <extension name="coverage">
         <pattern>
@@ -176,7 +149,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="mappertest.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="library.test.test" />
       <module name="library" />
       <extension name="coverage">
         <pattern>
@@ -184,10 +158,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="library.test" />
-      <option name="MAIN_CLASS_NAME" value="library.test.mappertest" />
-      <option name="METHOD_NAME" value="test2" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -404,18 +374,18 @@
     <list>
       <item itemvalue="Application.test" />
       <item itemvalue="JUnit.servicetest.test" />
-      <item itemvalue="JUnit.mappertest.test2" />
       <item itemvalue="JUnit.mappertest.usertest" />
       <item itemvalue="JUnit.mappertest.test3" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.29" />
+      <item itemvalue="Application.mappertest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.mappertest.test3" />
+        <item itemvalue="Application.mappertest" />
         <item itemvalue="JUnit.servicetest.test" />
         <item itemvalue="Application.test" />
         <item itemvalue="JUnit.mappertest.usertest" />
-        <item itemvalue="JUnit.mappertest.test2" />
       </list>
     </recent_temporary>
   </component>
@@ -495,7 +465,11 @@
       <workItem from="1583804346072" duration="3522000" />
       <workItem from="1583829686722" duration="2707000" />
       <workItem from="1583888783479" duration="15625000" />
-      <workItem from="1583975474841" duration="11967000" />
+      <workItem from="1583975474841" duration="13964000" />
+      <workItem from="1584061377892" duration="2074000" />
+      <workItem from="1584320841685" duration="16785000" />
+      <workItem from="1584406941644" duration="1847000" />
+      <workItem from="1584493035111" duration="11237000" />
     </task>
     <servers />
   </component>

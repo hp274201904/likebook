@@ -31,7 +31,9 @@ public class servicetest {
     IndentService indentService;
     @Test
     public void test() {
-        Msg msg = bookService.buyBook("Your name", 7);
-        System.out.println(msg.getMessage());
+        List<Book> books = journalService.selectPopularBook();
+        for (Book book:books){
+            System.out.println(book);
+        }
     }
 }

@@ -25,4 +25,7 @@
     <delete id="deleteByuser" parameterType="String">
         delete from indent where userName=#{userName}
     </delete>
+    <update id="updateUserName">
+        update indent set userName=#{afterName} where userName=#{beforeName}
+    </update>
  </mapper>

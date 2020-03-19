@@ -27,4 +27,7 @@ public interface IndentMapper {
                       @Param("bookName")String bookName);
 
     void deleteByuser(String userName);
+
+    void updateUserName(@Param("beforeName")String beforeName,
+                        @Param("afterName")String afterName);
 }

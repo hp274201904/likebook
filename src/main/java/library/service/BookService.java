@@ -68,5 +68,15 @@ public interface BookService {
      */
     Msg deleteBook(Integer bookId);
 
+    /**
+     * 查询最大的书号的书
+     * @return
+     */
     Book selectMax();
+
+    /**
+     * 查询最新书籍
+     * @return
+     */
+    List<Book> selectnowBook();
 }

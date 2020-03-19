@@ -2,6 +2,7 @@ package library.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import library.entity.Book;
 import library.entity.Journal;
 import library.service.JournalService;
 import library.until.Msg;
@@ -117,5 +118,27 @@ public class JournalController {
         List<Journal> journals = journalService.selectBorrowJo();
         PageInfo page=new PageInfo(journals,5);
         return page;
+    }
+
+    /**
+     * 查询热销榜的内容
+     * @return
+     */
+    @RequestMapping("/selectPopularBook")
+    @ResponseBody
+    public List<Book> selectPopularBook(){
+        List<Book> books = journalService.selectPopularBook();
+        return books;
+    }
+
+    /**
+     * 查询借阅榜里的内容
+     * @return
+     */
+    @RequestMapping("/selectPopularBBook")
+    @ResponseBody
+    public List<Book> selectPopularBBook(){
+        List<Book> books = journalService.selectPopularBBook();
+        return books;
     }
 }

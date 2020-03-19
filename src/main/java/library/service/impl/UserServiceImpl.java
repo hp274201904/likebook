@@ -1,27 +1,43 @@
 package library.service.impl;
 
+import library.dao.IndentMapper;
+import library.dao.JournalMapper;
 import library.dao.UserMapper;
+import library.dao.UserTimeMapper;
 import library.entity.Indent;
 import library.entity.Journal;
 import library.entity.User;
+import library.entity.UserTime;
 import library.service.IndentService;
 import library.service.JournalService;
 import library.service.UserService;
 import library.until.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Member;
+import java.util.Date;
 import java.util.List;
 
 @Service
+@Component
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
     @Autowired
+    IndentMapper indentMapper;
+    @Autowired
+    JournalMapper journalMapper;
+    @Autowired
+    UserTimeMapper userTimeMapper;
+    @Autowired
     JournalService journalService;
     @Autowired
     IndentService indentService;
+
+
     @Override
     public Msg insertUser(String userName, String password) {
         Msg msg=new Msg();
@@ -71,7 +87,17 @@ public class UserServiceImpl implements UserService {
             msg.setMessage("输入的数据有误，请重新输入！");
             return msg;
         }else {
+            User user = userMapper.selectUserById(userId);
             userMapper.updateUser(userId,userName,password,image,address);
+            String beforeName = user.getUserName();
+            if (!userName.equals(beforeName)){
+                indentMapper.updateUserName(beforeName,userName);
+                journalMapper.updateUserName(beforeName,userName);
+            }
+            UserTime userTime = userTimeMapper.selectByUserId(userId);
+            if (userTime!=null){
+                userTimeMapper.updateUserName(userId,userName);
+            }
             msg.setCode(-1);
             msg.setMessage("更新成功！");
             return msg;
@@ -130,6 +156,12 @@ public class UserServiceImpl implements UserService {
             Double money=user.getMoney()-30.0;
              String vip="是";
              userMapper.updateUserByName(vip,money,userName);
+            UserTime userTime = userTimeMapper.selectByUserId(user.getUserId());
+            if (userTime==null){
+                userTimeMapper.insertTime(new UserTime(user.getUserId(),user.getUserName(),new Date()));
+            }else {
+                userTimeMapper.updateTime(user.getUserId());
+            }
             msg.setCode(-1);
             msg.setMessage("你已是尊贵的vip用户了！");
              return msg;
@@ -151,7 +183,12 @@ public class UserServiceImpl implements UserService {
             msg.setCode(-1);
             msg.setMessage("输入数据有误请重新输入!");
             return msg;
-        }else {
+        }else if (userId==1){
+            msg.setCode(-1);
+            msg.setMessage("管理员数据无法修改!");
+            return msg;
+        }
+        else {
             User user = userMapper.selectUserById(userId);
             if (user==null){
                 User user1 = userMapper.selectbyName(userName);
@@ -161,29 +198,61 @@ public class UserServiceImpl implements UserService {
                     return msg;
                 }else {
                     userMapper.insertUser(userId,userName,password,"/userimage/男.jpeg",money,vip,address);
+                    if ("是".equals(vip)){
+                        userTimeMapper.insertTime(new UserTime(userId,userName,new Date()));
+                    }
                     msg.setCode(1);
                     msg.setMessage("增加用户成功！");
                     return msg;
                 }
             }else {
-                if (!user.getUserName().equals(userName)){
-                    msg.setCode(-1);
-                    msg.setMessage("用户名不可修改！");
-                    return msg;
-                }else {
+                    String beforeName = user.getUserName();
                     userMapper.updateUserByAll(userId,userName,password,user.getImage(),address,vip,money);
+                    UserTime userTime = userTimeMapper.selectByUserId(userId);
+                    if ("是".equals(vip)&&"否".equals(user.getVip())){
+                        if (userTime==null){
+                            userTimeMapper.insertTime(new UserTime(userId,userName,new Date()));
+                        }else {
+                            userTimeMapper.updateTime(userId);
+                        }
+                    }
+                    if (!userName.equals(beforeName)){
+                        indentMapper.updateUserName(beforeName,userName);
+                        journalMapper.updateUserName(beforeName,userName);
+                        if (userTime!=null){
+                            userTimeMapper.updateUserName(userId,userName);
+                        }
+                    }
                     msg.setCode(1);
                     msg.setMessage("修改用户成功！");
                     return msg;
-                }
-
             }
         }
     }
-
     @Override
     public User selectMax() {
         User user = userMapper.selectMax();
         return user;
+    }
+
+    /**
+     * 每天凌晨0点执行一次
+     */
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void test1(){
+        List<UserTime> userTimes = userTimeMapper.selectall();
+        Date nowTime=new Date();
+        for (UserTime userTime:userTimes){
+            if (userTime!=null&&userTime.getGetVipTime()!= null){
+                Date getVipTime = userTime.getGetVipTime();
+                Integer userId = userTime.getUserId();
+                //相差多少小时
+                long hour = (nowTime.getTime() - getVipTime.getTime()) / (1000 * 60 * 60);
+                if (hour>24 * 30){
+                    userTimeMapper.updateuserTime(userId);
+                    userMapper.updateUserVip(userId);
+                }
+            }
+        }
     }
 }
